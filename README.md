@@ -12,3 +12,11 @@ Front-end technologies:
 --format
 --html5
 --css3
+
+
+Digvijay Jatkar as jatkardigvijay
+backend technologies:
+--Java
+--SQL
+--Spring framework
+--Hibernate/JPA as orm tool
