@@ -30,8 +30,9 @@ public class StudentDaoImpl implements StudentDao {
 
 	/**
 	 * @author Digvijay.Jatkar
-	 * @Description This method executes query, connects with the database and gets the lists of students
-	 * @param 
+	 * @Description This method executes query, connects with the database and gets
+	 *              the lists of students
+	 * @param
 	 * @return List of all students
 	 * @throws StudentManagementSystemException
 	 * @Created 17/11/2022
@@ -46,9 +47,9 @@ public class StudentDaoImpl implements StudentDao {
 
 		try (Connection connection = dataSource.getConnection()) {
 
-			ps = connection.prepareStatement(Queries.GET_ALL_EMPLOYEES);
+			ps = connection.prepareStatement(Queries.GET_ALL_STUDENTS);
 
-			logger.info("executing query : " + Queries.GET_ALL_EMPLOYEES);
+			logger.info("executing query : " + Queries.GET_ALL_STUDENTS);
 
 			ResultSet rs = ps.executeQuery();
 
@@ -63,7 +64,7 @@ public class StudentDaoImpl implements StudentDao {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new StudentManagementSystemException("Error executing stored procedure",
+			throw new StudentManagementSystemException("Error executing stored procedure" + Queries.GET_ALL_STUDENTS,
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
@@ -79,6 +80,49 @@ public class StudentDaoImpl implements StudentDao {
 		}
 
 		return studentList;
+	}
+
+	@Override
+	public Student getStudentById(int id) throws StudentManagementSystemException {
+
+		Student student = null;
+		PreparedStatement ps = null;
+
+		try (Connection connection = dataSource.getConnection()) {
+
+			ps = connection.prepareStatement(Queries.GET_STUDENT_BY_ID);
+
+			ps.setObject(1, id);
+
+			logger.info("executing query = " + Queries.GET_STUDENT_BY_ID);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+
+				student = new Student(rs.getInt("studentId"), rs.getString("firstName"), rs.getString("lastName"),
+						rs.getString("emailId"), rs.getInt("studentAge"), rs.getString("contactNumber"));
+
+				return student;
+			}
+
+		} catch (Exception e) {
+			logger.error("error executing query = " + Queries.GET_STUDENT_BY_ID);
+			e.printStackTrace();
+		}
+
+		finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException ee) {
+				logger.error(ee.getMessage());
+				ee.printStackTrace();
+			}
+		}
+
+		return student;
 	}
 
 }

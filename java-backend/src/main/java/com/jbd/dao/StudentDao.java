@@ -9,4 +9,6 @@ public interface StudentDao {
 
 	List<Student> getAllStudents() throws StudentManagementSystemException;
 
+	Student getStudentById(int id) throws StudentManagementSystemException;
+
 }

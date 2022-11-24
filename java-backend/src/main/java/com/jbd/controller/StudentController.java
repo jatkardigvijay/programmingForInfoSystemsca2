@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,16 +24,17 @@ import com.jbd.service.StudentService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("student")
 public class StudentController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(StudentController.class.getName());
-	
+
 	@Autowired
 	private StudentService studentService;
-	
+
 	/**
 	 * @author Digvijay.Jatkar
-	 * @Description This method gets the list all the students by connecting with the database
-	 * @param 
+	 * @Description This method gets the list all the students by connecting with
+	 *              the database
+	 * @param
 	 * @return List of all students
 	 * @throws StudentManagementSystemException
 	 * @Created 17/11/2022
@@ -40,16 +42,30 @@ public class StudentController {
 	 **/
 	@GetMapping("api/v1")
 	public ResponseEntity<Response> getAllStudents() throws StudentManagementSystemException {
-			
+
 		List<Student> studentList = studentService.getAllStudents();
-		
+
 		if (studentList == null || studentList.isEmpty()) {
-			
+
 			logger.info("No data found or list is empty");
-			throw new StudentManagementSystemException("", HttpStatus.OK,studentList);
-		} 
-		
+			throw new StudentManagementSystemException("", HttpStatus.OK, studentList);
+		}
+
 		return new ResponseEntity<Response>(new Response("success", studentList, null), HttpStatus.OK);
 	}
-	
+
+	@GetMapping("/api/v1/{id}")
+	public ResponseEntity<Response> getEmployeeById(@PathVariable("id") int id) throws StudentManagementSystemException {
+
+		Student employee = studentService.getStudentById(id);
+
+		if (employee == null) {
+			logger.info("Employee with id = " + id + " no found");
+			throw new StudentManagementSystemException("No data found", HttpStatus.OK, employee);
+		} else {
+			logger.info("Received employee with id = " + id);
+			return new ResponseEntity<Response>(new Response("success", employee, null), HttpStatus.OK);
+		}
+	}
+
 }

@@ -38,6 +38,15 @@ public class StudentServiceImpl implements StudentService {
 		logger.info("executing getAllStudents() from StudentServiceImpl");
 		return studentDao.getAllStudents();
 	}
+
+	@Override
+	public Student getStudentById(int id) throws StudentManagementSystemException{
+		
+		logger.info("executing getEmployeeById() from StudentServiceImpl with id= "+id);
+		return studentDao.getStudentById(id);
+	}
+	
+	
 	
 	
 	

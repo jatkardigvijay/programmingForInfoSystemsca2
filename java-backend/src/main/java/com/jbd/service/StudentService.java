@@ -7,6 +7,8 @@ import com.jbd.exception.StudentManagementSystemException;
 
 public interface StudentService {
 
-	public List<Student> getAllStudents() throws StudentManagementSystemException;
+	List<Student> getAllStudents() throws StudentManagementSystemException;
+
+	Student getStudentById(int id) throws StudentManagementSystemException;
 
 }
