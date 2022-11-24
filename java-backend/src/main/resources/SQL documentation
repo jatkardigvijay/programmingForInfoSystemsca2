@@ -1,0 +1,21 @@
+#Database create command
+CREATE DATABASE StudentMgmtSystemDB;
+
+#Use database command
+use StudentMgmtSystemDB;
+
+CREATE TABLE student (
+    studentId int IDENTITY(1,1) PRIMARY KEY,
+    firstName varchar(255) NOT NULL,
+    lastName varchar(255),
+    emailId varchar(255),
+    studentAge int,
+    contactNumber varchar(255)
+);
+
+#insert into table 'student' command
+INSERT INTO student VALUES ('Digvijay','Jatkar','jatkardigvijay@gmail.com',26,'+353 87 719 7021');
+
+#Queries
+select * from student;
+select * from student where studentId = ?;
