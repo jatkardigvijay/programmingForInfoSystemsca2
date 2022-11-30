@@ -54,6 +54,16 @@ public class StudentController {
 		return new ResponseEntity<Response>(new Response("success", studentList, null), HttpStatus.OK);
 	}
 
+	/**
+	 * @author Vishal.Singh
+	 * @Description This method gets the student data by student id from the DB
+	 *             
+	 * @param
+	 * @return Student data by Id
+	 * @throws StudentManagementSystemException
+	 * @Created 23/11/2022
+	 * @Updated
+	 **/
 	@GetMapping("/api/v1/{id}")
 	public ResponseEntity<Response> getEmployeeById(@PathVariable("id") int id) throws StudentManagementSystemException {
 

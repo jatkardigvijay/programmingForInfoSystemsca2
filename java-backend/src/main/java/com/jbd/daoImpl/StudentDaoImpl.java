@@ -82,6 +82,16 @@ public class StudentDaoImpl implements StudentDao {
 		return studentList;
 	}
 
+	/**
+	 * @author Vishal.Singh
+	 * @Description This method gets the student data by student id from the DB
+	 *             
+	 * @param
+	 * @return Student data by Id
+	 * @throws StudentManagementSystemException
+	 * @Created 23/11/2022
+	 * @Updated
+	 **/
 	@Override
 	public Student getStudentById(int id) throws StudentManagementSystemException {
 
