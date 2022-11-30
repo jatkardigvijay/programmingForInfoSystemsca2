@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jbd.config.Response;
@@ -40,7 +41,7 @@ public class StudentController {
 	 * @Created 17/11/2022
 	 * @Updated
 	 **/
-	@GetMapping("api/v1")
+	@RequestMapping(path = "api/v1", method = RequestMethod.GET)
 	public ResponseEntity<Response> getAllStudents() throws StudentManagementSystemException {
 
 		List<Student> studentList = studentService.getAllStudents();
@@ -57,15 +58,16 @@ public class StudentController {
 	/**
 	 * @author Vishal.Singh
 	 * @Description This method gets the student data by student id from the DB
-	 *             
+	 * 
 	 * @param
 	 * @return Student data by Id
 	 * @throws StudentManagementSystemException
 	 * @Created 23/11/2022
 	 * @Updated
 	 **/
-	@GetMapping("/api/v1/{id}")
-	public ResponseEntity<Response> getEmployeeById(@PathVariable("id") int id) throws StudentManagementSystemException {
+	@RequestMapping(path = "/api/v1/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Response> getEmployeeById(@PathVariable("id") int id)
+			throws StudentManagementSystemException {
 
 		Student employee = studentService.getStudentById(id);
 
