@@ -82,6 +82,16 @@ public class StudentController {
 		}
 	}
 
+	/**
+	 * @author Digvijay.Jatkar
+	 * @Description This method deletes the student data from the database on passing the id
+	 * 
+	 * @param Student id
+	 * @return Student id of which the student data is removed/deleted 
+	 * @throws StudentManagementSystemException
+	 * @Created 05/12/2022
+	 * @Updated
+	 **/
 	@RequestMapping(path = "api/v1/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Integer> deleteById(
 			@Min(value = 1, message = "minimum value should be 1") @PathVariable("id") Integer id)
