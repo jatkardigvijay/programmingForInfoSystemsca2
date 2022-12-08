@@ -85,7 +85,7 @@ public class StudentDaoImpl implements StudentDao {
 	/**
 	 * @author Vishal.Singh
 	 * @Description This method gets the student data by student id from the DB
-	 *             
+	 * 
 	 * @param
 	 * @return Student data by Id
 	 * @throws StudentManagementSystemException
@@ -119,6 +119,8 @@ public class StudentDaoImpl implements StudentDao {
 		} catch (Exception e) {
 			logger.error("error executing query = " + Queries.GET_STUDENT_BY_ID);
 			e.printStackTrace();
+			throw new StudentManagementSystemException("Error executing query" + Queries.GET_STUDENT_BY_ID,
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		finally {
@@ -133,6 +135,42 @@ public class StudentDaoImpl implements StudentDao {
 		}
 
 		return student;
+	}
+
+	@Override
+	public boolean deleteStudentById(Integer id) throws StudentManagementSystemException {
+
+		PreparedStatement ps = null;
+
+		try (Connection connection = dataSource.getConnection()) {
+
+			ps = connection.prepareStatement(Queries.DELETE_STUDENT_BY_ID);
+
+			ps.setObject(1, id);
+
+			boolean rs = ps.execute();
+
+			if (rs == true) {
+				return true;
+			}
+
+		} catch (Exception e) {
+			logger.error("Error executing query : " + Queries.DELETE_STUDENT_BY_ID);
+			e.printStackTrace();
+			throw new StudentManagementSystemException("Error executing stored procedure" + Queries.GET_ALL_STUDENTS,
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException ee) {
+				logger.error(ee.getMessage());
+				ee.printStackTrace();
+			}
+		}
+
+		return true;
 	}
 
 }

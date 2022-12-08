@@ -2,6 +2,8 @@ package com.jbd.controller;
 
 import java.util.List;
 
+import javax.validation.constraints.Min;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,19 +68,33 @@ public class StudentController {
 	 * @Created 23/11/2022
 	 * @Updated
 	 **/
-	@RequestMapping(path = "/api/v1/{id}", method = RequestMethod.GET)
+	@GetMapping("/api/v1/{id}")
 	public ResponseEntity<Response> getEmployeeById(@PathVariable("id") int id)
 			throws StudentManagementSystemException {
 
-		Student employee = studentService.getStudentById(id);
+		Student student = studentService.getStudentById(id);
 
-		if (employee == null) {
-			logger.info("Employee with id = " + id + " no found");
-			throw new StudentManagementSystemException("No data found", HttpStatus.OK, employee);
+		if (student == null) {
+			logger.info("Employee with id = " + id + " not found");
+			throw new StudentManagementSystemException("No data found", HttpStatus.OK, student);
 		} else {
 			logger.info("Received employee with id = " + id);
-			return new ResponseEntity<Response>(new Response("success", employee, null), HttpStatus.OK);
+			return new ResponseEntity<Response>(new Response("success", student, null), HttpStatus.OK);
 		}
 	}
 
+	@RequestMapping(path = "api/v1/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Integer> deleteById(
+			@Min(value = 1, message = "minimum value should be 1") @PathVariable("id") Integer id)
+			throws StudentManagementSystemException {
+
+		boolean isRemoved = studentService.deleteStudentById(id);
+
+		if (!isRemoved) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<Integer>(id, HttpStatus.OK);
+
+	}
 }

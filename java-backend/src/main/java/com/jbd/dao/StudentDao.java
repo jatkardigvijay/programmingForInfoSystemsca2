@@ -11,4 +11,6 @@ public interface StudentDao {
 
 	Student getStudentById(int id) throws StudentManagementSystemException;
 
+	boolean deleteStudentById(Integer id) throws StudentManagementSystemException;
+
 }

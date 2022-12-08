@@ -45,6 +45,13 @@ public class StudentServiceImpl implements StudentService {
 		logger.info("executing getEmployeeById() from StudentServiceImpl with id= "+id);
 		return studentDao.getStudentById(id);
 	}
+
+	@Override
+	public boolean deleteStudentById(Integer id) throws StudentManagementSystemException {
+		
+		logger.info("executing deleteById() from StudentServiceImpl with id= "+id);
+		return studentDao.deleteStudentById(id);
+	}
 	
 	
 	
