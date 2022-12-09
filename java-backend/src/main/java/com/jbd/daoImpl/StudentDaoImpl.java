@@ -137,6 +137,17 @@ public class StudentDaoImpl implements StudentDao {
 		return student;
 	}
 
+	/**
+	 * @author Digvijay.Jatkar
+	 * @Description This method deletes the student data from the database on
+	 *              passing the id
+	 * 
+	 * @param Student id
+	 * @return Student id of which the student data is removed/deleted
+	 * @throws StudentManagementSystemException
+	 * @Created 05/12/2022
+	 * @Updated
+	 **/
 	@Override
 	public boolean deleteStudentById(Integer id) throws StudentManagementSystemException {
 
@@ -160,6 +171,50 @@ public class StudentDaoImpl implements StudentDao {
 			throw new StudentManagementSystemException("Error executing stored procedure" + Queries.GET_ALL_STUDENTS,
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException ee) {
+				logger.error(ee.getMessage());
+				ee.printStackTrace();
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean insertEmployee(Student student) throws StudentManagementSystemException {
+
+		PreparedStatement ps = null;
+
+		try (Connection connection = dataSource.getConnection()) {
+
+			ps = connection.prepareStatement(Queries.INSERT_STUDENT);
+
+			logger.info("executing query : " + Queries.INSERT_STUDENT);
+
+			ps.setString(1, student.getFirstName());
+			ps.setString(2, student.getLastName());
+			ps.setInt(3, student.getStudentAge());
+			ps.setString(4, student.getEmailId());
+			ps.setString(5, student.getContactNumber());
+
+			int rs = ps.executeUpdate();
+
+			if (rs == 1) {
+
+				return true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new StudentManagementSystemException("Error executing query " + Queries.INSERT_STUDENT,
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		finally {
 			try {
 				if (ps != null) {
 					ps.close();

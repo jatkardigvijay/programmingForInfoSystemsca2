@@ -13,6 +13,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -84,16 +86,17 @@ public class StudentController {
 
 	/**
 	 * @author Digvijay.Jatkar
-	 * @Description This method deletes the student data from the database on passing the id
+	 * @Description This method deletes the student data from the database on
+	 *              passing the id
 	 * 
 	 * @param Student id
-	 * @return Student id of which the student data is removed/deleted 
+	 * @return Student id of which the student data is removed/deleted
 	 * @throws StudentManagementSystemException
 	 * @Created 05/12/2022
 	 * @Updated
 	 **/
 	@RequestMapping(path = "api/v1/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Integer> deleteById(
+	public ResponseEntity<Integer> deleteStudentById(
 			@Min(value = 1, message = "minimum value should be 1") @PathVariable("id") Integer id)
 			throws StudentManagementSystemException {
 
@@ -105,5 +108,22 @@ public class StudentController {
 
 		return new ResponseEntity<Integer>(id, HttpStatus.OK);
 
+	}
+
+	/**
+	 * @author Digvijay.Jatkar
+	 * @Description This method inserts data into the database
+	 * 
+	 * @param Student
+	 * @return boolean of which the student data is inserted
+	 * @throws StudentManagementSystemException
+	 * @Created 09/12/2022
+	 * @Updated
+	 **/
+	@PostMapping("/api/v1/add")
+	public boolean insertEmployee(@RequestBody Student student) throws StudentManagementSystemException {
+
+		logger.info("executing insertEmployee() method from employee controller");
+		return studentService.insertEmployee(student);
 	}
 }
