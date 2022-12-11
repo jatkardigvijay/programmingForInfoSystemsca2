@@ -184,8 +184,18 @@ public class StudentDaoImpl implements StudentDao {
 		return true;
 	}
 
+	/**
+	 * @author Digvijay.Jatkar
+	 * @Description This method inserts data into the database
+	 * 
+	 * @param Student
+	 * @return boolean of which the student data is inserted
+	 * @throws StudentManagementSystemException
+	 * @Created 09/12/2022
+	 * @Updated 11/12/2022
+	 **/
 	@Override
-	public boolean insertEmployee(Student student) throws StudentManagementSystemException {
+	public boolean insertStudent(Student student) throws StudentManagementSystemException {
 
 		PreparedStatement ps = null;
 
@@ -226,6 +236,60 @@ public class StudentDaoImpl implements StudentDao {
 		}
 
 		return true;
+	}
+
+	/**
+	 * @author Digvijay.Jatkar
+	 * @Description This method updates student data in the database
+	 * 
+	 * @param Student
+	 * @return Updated student data
+	 * @throws StudentManagementSystemException
+	 * @Created 11/12/2022
+	 * @Updated
+	 **/
+	@Override
+	public Student updateStudent(Student student) throws StudentManagementSystemException {
+
+		PreparedStatement ps = null;
+
+		try (Connection connection = dataSource.getConnection()) {
+
+			ps = connection.prepareStatement(Queries.UPDATE_STUDENT);
+
+			if (student != null) {
+
+				ps.setString(1, student.getFirstName());
+				ps.setString(2, student.getLastName());
+				ps.setString(3, student.getEmailId());
+				ps.setInt(4, student.getStudentAge());
+				ps.setString(5, student.getContactNumber());
+				ps.setInt(6, student.getStudentId());
+			}
+
+			int rs = ps.executeUpdate();
+
+			if (rs == 1) {
+				logger.info("Student updated successfully with student id : " + student.getStudentId());
+				System.out.println("Student with id " + student.getStudentId() + " successfully updated");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new StudentManagementSystemException("Error executing query " + Queries.UPDATE_STUDENT,
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException ee) {
+				logger.error(ee.getMessage());
+				ee.printStackTrace();
+			}
+		}
+
+		return student;
 	}
 
 }

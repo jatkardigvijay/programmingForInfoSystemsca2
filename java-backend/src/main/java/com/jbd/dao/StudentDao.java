@@ -13,6 +13,8 @@ public interface StudentDao {
 
 	boolean deleteStudentById(Integer id) throws StudentManagementSystemException;
 
-	boolean insertEmployee(Student student) throws StudentManagementSystemException;
+	boolean insertStudent(Student student) throws StudentManagementSystemException;
+
+	Student updateStudent(Student student) throws StudentManagementSystemException;
 
 }

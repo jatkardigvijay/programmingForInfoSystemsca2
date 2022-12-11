@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,16 +71,19 @@ public class StudentController {
 	 * @Updated
 	 **/
 	@GetMapping("/api/v1/{id}")
-	public ResponseEntity<Response> getEmployeeById(@PathVariable("id") int id)
-			throws StudentManagementSystemException {
+	public ResponseEntity<Response> getStudentById(@PathVariable("id") int id) throws StudentManagementSystemException {
 
 		Student student = studentService.getStudentById(id);
 
-		if (student == null) {
-			logger.info("Employee with id = " + id + " not found");
-			throw new StudentManagementSystemException("No data found", HttpStatus.OK, student);
+		if (id < 1) {
+			logger.info("Id cannot be less than 1");
+			throw new StudentManagementSystemException("Enter correct id", HttpStatus.OK, student);
+		} else if (student == null) {
+			logger.info("Student with id = " + id + " not found");
+			throw new StudentManagementSystemException("Data for id = " + id + " does not exist", HttpStatus.OK,
+					student);
 		} else {
-			logger.info("Received employee with id = " + id);
+			logger.info("Received student with id = " + id);
 			return new ResponseEntity<Response>(new Response("success", student, null), HttpStatus.OK);
 		}
 	}
@@ -118,12 +122,52 @@ public class StudentController {
 	 * @return boolean of which the student data is inserted
 	 * @throws StudentManagementSystemException
 	 * @Created 09/12/2022
-	 * @Updated
+	 * @Updated 11/12/2022
 	 **/
 	@PostMapping("/api/v1/add")
-	public boolean insertEmployee(@RequestBody Student student) throws StudentManagementSystemException {
+	public boolean insertStudent(@RequestBody Student student) throws StudentManagementSystemException {
 
-		logger.info("executing insertEmployee() method from employee controller");
-		return studentService.insertEmployee(student);
+		logger.info("executing insertStudent() method from student controller");
+		return studentService.insertStudent(student);
+	}
+
+	/**
+	 * @author Digvijay.Jatkar
+	 * @Description This updates a Student info based on the student id
+	 * @param Student as a body, Id
+	 * @return updated Student
+	 * @throws StudentManagementSystemException
+	 * @Created 11/12/2022
+	 * @Updated
+	 **/
+	@PutMapping("/api/v1/update/{id}")
+	public ResponseEntity<Response> updateStudent(@RequestBody Student student, @PathVariable("id") Integer id)
+			throws StudentManagementSystemException {
+		validationCheck(id);
+		student.setStudentId(id);
+		Student updatedStuent = studentService.updatedStudent(student);
+
+		return new ResponseEntity<Response>(new Response("Record updated successfully", updatedStuent, null),
+				HttpStatus.OK);
+
+	}
+
+	/**
+	 * @author Digvijay.Jatkar
+	 * @Description This method is for the validation of an student used in update employee API
+	 * @param Id
+	 * @return updated Student
+	 * @throws StudentManagementSystemException
+	 * @Created 11/12/2022
+	 * @Updated
+	 **/
+	public int validationCheck(int id) throws StudentManagementSystemException {
+
+		if (id >= 1) {
+			return id;
+		} else {
+			throw new StudentManagementSystemException("Id should be equal to 1 or greater than 1",
+					HttpStatus.BAD_REQUEST);
+		}
 	}
 }

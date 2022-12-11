@@ -43,7 +43,7 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Student getStudentById(int id) throws StudentManagementSystemException {
 
-		logger.info("executing getEmployeeById() from StudentServiceImpl with id= " + id);
+		logger.info("executing getStudentById() from StudentServiceImpl with id= " + id);
 		return studentDao.getStudentById(id);
 	}
 
@@ -55,10 +55,18 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public boolean insertEmployee(Student student) throws StudentManagementSystemException {
+	public boolean insertStudent(Student student) throws StudentManagementSystemException {
 
-		logger.info("executing insertEmployee() from StudentServiceImpl with id= " + student);
-		return studentDao.insertEmployee(student);
+		logger.info("executing insertStudent() from StudentServiceImpl with id= " + student);
+		return studentDao.insertStudent(student);
 	}
 
+	@Override
+	public Student updatedStudent(Student student) throws StudentManagementSystemException {
+
+		logger.info("executing updatedStudent() from StudentServiceImpl with id= " + student);
+		return studentDao.updateStudent(student);
+	}
+	
+	
 }
