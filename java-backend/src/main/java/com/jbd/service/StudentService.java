@@ -13,7 +13,7 @@ public interface StudentService {
 
 	boolean deleteStudentById(Integer id) throws StudentManagementSystemException;
 
-	boolean insertStudent(Student student) throws StudentManagementSystemException;
+	Student insertStudent(Student student) throws StudentManagementSystemException;
 
 	Student updatedStudent(Student student) throws StudentManagementSystemException;
 

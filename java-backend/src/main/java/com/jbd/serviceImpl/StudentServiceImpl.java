@@ -55,7 +55,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public boolean insertStudent(Student student) throws StudentManagementSystemException {
+	public Student insertStudent(Student student) throws StudentManagementSystemException {
 
 		logger.info("executing insertStudent() from StudentServiceImpl with id= " + student);
 		return studentDao.insertStudent(student);

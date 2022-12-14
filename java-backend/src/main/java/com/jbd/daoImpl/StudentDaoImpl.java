@@ -195,7 +195,7 @@ public class StudentDaoImpl implements StudentDao {
 	 * @Updated 11/12/2022
 	 **/
 	@Override
-	public boolean insertStudent(Student student) throws StudentManagementSystemException {
+	public Student insertStudent(Student student) throws StudentManagementSystemException {
 
 		PreparedStatement ps = null;
 
@@ -207,15 +207,15 @@ public class StudentDaoImpl implements StudentDao {
 
 			ps.setString(1, student.getFirstName());
 			ps.setString(2, student.getLastName());
-			ps.setInt(3, student.getStudentAge());
-			ps.setString(4, student.getEmailId());
+			ps.setString(3, student.getEmailId());
+			ps.setInt(4, student.getStudentAge());
 			ps.setString(5, student.getContactNumber());
 
 			int rs = ps.executeUpdate();
 
 			if (rs == 1) {
 
-				return true;
+				return student;
 			}
 
 		} catch (Exception e) {
@@ -235,7 +235,7 @@ public class StudentDaoImpl implements StudentDao {
 			}
 		}
 
-		return true;
+		return student;
 	}
 
 	/**

@@ -125,7 +125,7 @@ public class StudentController {
 	 * @Updated 11/12/2022
 	 **/
 	@PostMapping("/api/v1/add")
-	public boolean insertStudent(@RequestBody Student student) throws StudentManagementSystemException {
+	public Student insertStudent(@RequestBody Student student) throws StudentManagementSystemException {
 
 		logger.info("executing insertStudent() method from student controller");
 		return studentService.insertStudent(student);
