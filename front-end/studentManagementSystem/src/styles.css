@@ -1,17 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-.navbar-nav{
+/* .navbar-nav{
     text-decoration: none;
     list-style: none;
 }
 .navbar-nav a{
     color: white;
-}
+} */
 .footer{
     position: absolute;
     bottom: 0px;
     width: 100%;
     height: 70px;
-    background-color: black;
+    background-color: blue;
     text-align: center;
     color: white;
 }
