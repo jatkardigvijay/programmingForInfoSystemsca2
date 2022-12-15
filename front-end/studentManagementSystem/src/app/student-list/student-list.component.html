@@ -2,22 +2,30 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>StudentId</th>
             <th>FirstName</th>
             <th>LastName</th>
             <th>EmailId</th>
             <th>Student Age</th>
             <th>Contact Number</th>
+
+            <th>Actions</th>
+
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let student of students">
-            <td>{{student.studentId}}</td>
             <td>{{student.firstName}}</td>
             <td>{{student.lastName}}</td>
             <td>{{student.emailId}}</td>
             <td>{{student.studentAge}}</td>
+          
             <td>{{student.contactNumber}}</td>
+    
+            <td>
+                <!-- <button (click)="updateStudent(student)" class="btn btn-info">Update</button>
+                 -->
+                 <button (click)="updateStudent(student.id)" class="btn btn-info">Update</button>
+            </td>
 
 
         </tr>

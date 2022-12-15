@@ -2,6 +2,8 @@
 <h3>Create Student</h3>
 <form (ngSubmit)="onSubmit()">
 
+
+
     <div class="form-group">
         <label>First Name</label>
         <input type="text" class="form-control" id="firstName"
@@ -19,14 +21,15 @@
     </div>
     <div class="form-group">
         <label>Student Age</label>
-        <input type="text" class="form-control" id="firstName" [(ngModel)]="student.studentAge"
+        <input type="number" class="form-control" id="firstName" [(ngModel)]="student.studentAge"
           name="studentAge">
     </div>
     <div class="form-group">
         <label>Contact Number</label>
-        <input type="text" class="form-control" id="firstName" [(ngModel)]="student.contactNumber"
+        <input type="number" class="form-control" id="firstName" [(ngModel)]="student.contactNumber"
           name="firstName">
     </div>
+
     <button class="btn btn-success" type="submit">Submit</button>
  
 </form>
