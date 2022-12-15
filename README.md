@@ -1,7 +1,7 @@
 # programmingForInfoSystemsca2
 
-Front-end technologies:
---Angularjs
+Febin Skariya worked on Front-end technologies:
+--Angularjs(Typescript)
 --bootstrap
 
 #vishalsingh as crystalsedge
