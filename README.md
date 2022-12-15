@@ -1,17 +1,13 @@
 # programmingForInfoSystemsca2
 
 Front-end technologies:
---jquery
---json
---vanilla js
+--Angularjs
 --bootstrap
---html5
---css3
+
 #vishalsingh as crystalsedge
 --report generation
 --format
---html5
---css3
+--creating student view in Angular
 
 
 Digvijay Jatkar as jatkardigvijay
