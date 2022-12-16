@@ -31,6 +31,12 @@ backend technologies:
 --Spring framework
 --Hibernate/JPA as orm tool
 
+Digvijay Jatkar
+- As a group assignment, we built a Student Management System for CA2 of Programming and Information Systems. The technology stack used in this project was Core Java, MS-SQL, Spring Boot Framework, HTML, CSS, JavaScript, TypeScript, Angular.
+- My role as an individual contributor (IC), was to create REST APIs in Java programming language.
+- I used all the programming paradigms, the concepts of OOPS while building the APIs. After developing the REST APIs and connecting with the database, I tested them using POSTMAN as the rest client tool.
+- Further, considering client can test the API, I also implemented SWAGGER UI in Java and ran it successfully. For the successful code coverage, I wrote Junit tests also for the service layer as per the industry standards and ran them successfully so that they can be measured while deploying the project using CI/Cd pipeline.
+
 
 # Reference:
 Angular Documentation Available at: https://angular.io/(Accessed: 08th December 2022)
