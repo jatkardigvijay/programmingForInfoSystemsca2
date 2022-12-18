@@ -21,9 +21,19 @@ Febin Skariya worked on Front-end technologies:
 - Next I created a component for create-student and then created create student form, later connected angular with create student api, before that I tested the api in Postman to check whether the api’s are valid. Created angular components on update and delete student.
 
 vishalsingh as crystalsedge
---report generation
---format
---creating student view in Angular
+--Technoloies Used
+  Bootstrap
+  HTML5
+  CSS3
+  JavaScript
+  TypeScript
+  Angular
+
+Vishal Singh
+- I created view-student component in angular using JavaScript and mainly TypeScript and using Web Technologies such as HTML5, CSS3 and Bootstrap. 
+- Further I also created getStudentById REST Api and wrote controller, service and DAO(Database Access Object) layer for the same and tested it using REST client ie. POSTMAN.
+- For the Webservice, application properties were researched and put into the respective files by me. 
+- I wrote JUnit test cases for service layer considering both, the positive as well as the negative scenarios.
 
 
 Digvijay Jatkar as jatkardigvijay
